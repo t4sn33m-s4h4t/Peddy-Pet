@@ -1,0 +1,44 @@
+.lato {
+    font-family: "Lato", sans-serif;
+}
+
+.active {
+    border-radius: 50px;
+    border: 1px solid #0E7A81;
+    background-color: #0e798121;
+}
+
+#category-container button {
+    width: 24%;
+}
+
+.spinner {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: teal;
+    position: relative;
+    margin: auto;
+}
+
+.spinner:before,
+.spinner:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    inset: 0;
+    background: teal;
+    transform: rotate(0deg) translate(30px);
+    animation: rotate 1s ease infinite;
+}
+
+.spinner:after {
+    animation-delay: 0.5s
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg) translate(30px)
+    }
+
+}

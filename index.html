@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peddy - Pet Adoption Platform</title>
+    <link rel="shortcut icon" href="./images/logo.webp" type="image/x-icon">
+    <!-- FontAwesome CDN  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Lato Font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- daisyUI CDN  -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- /* custom CSS  */ -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="lato">
+    <!-- Header Section -->
+    <header class="bg-white py-5">
+        <div class="w-11/12 mx-auto flex flex-col items-center text-center">
+            <!-- Navbar -->
+            <navbar class="grid lg:grid-cols-3 grid-cols-2 items-center w-full mb-8">
+                <div class="flex items-center cursor-pointer">
+                    <img src="./images/logo.webp" alt="Peddy Logo" class="">
+                    <h1 class="ml-2 text-3xl font-bold text-gray-900">Peddy</h1>
+                </div>
+                <div class="overlay bg-teal-800 fixed top-0 left-0 right-0 bottom-0 hidden transition-all duration-1000 opacity-10 z-10"
+                    onclick="showMobileMenu()"></div>
+
+                <nav id="mobileNav"
+                    class="flex z-20 transition-all duration-700 font-semibold fixed top-0 bottom-0 flex-col bg-teal-700 px-20 space-y-14 justify-start pt-20 text-white text-center text-lg -left-60 
+
+                lg:justify-center lg:space-x-8 lg:text-gray-500 lg:static lg:bg-transparent lg:px-0 lg:space-y-0 lg:pt-0 lg:flex-row lg:text-lg">
+                    <div
+                        class="mx-auto border-2 lg:hidden text-2xl rounded-full lg:border border-gray-300 h-12 w-12 flex items-center text-gray-500 justify-center cursor-pointer">
+                        <i class="text-white fa-regular fa-user"></i>
+                    </div>
+                    <a href="#" class="lg:hover:text-gray-900 ">Home</a>
+                    <a href="#" class="lg:hover:text-gray-900 ">Shop</a>
+                    <a href="#" class="lg:hover:text-gray-900 ">Contact</a>
+                </nav>
+                <div class="lg:flex justify-end hidden">
+                    <div
+                        class="text-2xl rounded-full border border-gray-300 h-12 w-12 flex items-center text-gray-500 justify-center cursor-pointer">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                </div>
+                <div class="lg:hidden justify-end flex">
+                    <button onclick="showMobileMenu()"
+                        class="text-2xl z-20 rounded-full border border-gray-300 h-12 w-12 flex items-center text-gray-500 justify-center cursor-pointer">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </navbar>
+
+
+            <!-- Hero Section -->
+            <div class="flex flex-col items-center">
+                <div class="flex space-x-2">
+                    <p class="lg:text-2xl text-lg font-bold text-gray-400 mb-4">Bringing Families Together </p>
+                    <img class="h-7"
+                        src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/svg/1f525.svg" alt="">
+                </div>
+                <h2 class="lg:text-6xl md:text-5xl text-4xl font-bold max-w-2xl text-gray-900 leading-tight mb-4">Your
+                    Path to Adoption Starts
+                    Here</h2>
+                <p class="text-gray-500 max-w-lg mb-4">
+                    Are you pet lover? Then you are in the correct place. Find your pets and adopt them with just some simple clicks. Don't forget to like them.
+                </p>
+                <a onclick="scrollToAdopt()"
+                    class="bg-teal-600 text-white font-semibold py-3 md:px-6 px-4 rounded-md hover:bg-teal-700 cursor-pointer">
+                    View More
+                </a>
+                <div>
+                    <img src="./images/pet.webp" alt="Dog and Cat" class="mx-auto max-w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Section -->
+    <main>
+        <!-- Adopt Section -->
+    <section id="adopt-section" class="bg-white py-8">
+        <div class="w-10/12 mx-auto text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-2">Adopt Your Best Friend</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto my-8">What if there was a platform where you could find all the pets in your area up for adoption, search and filter based on category, age, breed, color, behavior etc to find the exact pet you are looking for. Wouldn’t that be amazing ?</p>
+
+            <div id="category-container" class="flex justify-between mb-6"></div>
+            <div class="flex justify-between items-center mb-5 font-extrabold">
+                <h2 class="md:text-xl text-lg">Best Deal For You</h2>
+                <button class="bg-teal-600 text-white font-semibold py-3 px-3 md:px-6 rounded-md hover:bg-teal-700"
+                    onclick="sortByPrice()">
+                    Sort by Price
+                </button>
+            </div>
+            <div id="spinner" class="spinner hidden mt-32 lg:mt-10 mb-56"></div>
+            <div id="posts-container" class="grid lg:grid-cols-[74%_24%] lg:gap-[2%] gap-5">
+                <div>
+                    <div id="pet-grid" class="grid lg:grid-cols-3 md:grid-cols-2 gap-3 lg:gap-[1%] lg:mb-52 ">
+                    </div>
+
+                    <div class="hidden" id="error-display">
+                        <div class="rounded-xl bg-gray-100 text-center py-24">
+                            <img class="mx-auto" src="./images/error.webp" alt="">
+                            <h1 class="text-3xl font-extrabold my-2">No Information Available</h1>
+                            <p class="text-gray-600 max-w-2xl mx-auto">Sorry, we couldn’t find any pets for you at the moment. Don’t worry! Feel free to explore other options or check back later</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <div id="liked-pets" class="grid grid-cols-2 gap-4 rounded-xl p-4  mb-22">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    </main>
+    
+    <footer class="bg-gray-950 text-white p-6">
+        <div class="w-10/12 mx-auto grid grid-cols-1 md:grid-cols-[30%_20%_25%] justify-between gap-6 py-16">
+            <!-- Left Section -->
+            <div>
+                <h2 class="text-2xl font-bold flex items-center">
+                    <img src="./images/logo.webp" class="mr-3" alt=""> Peddy
+                </h2>
+                <div class="space-y-2">
+                    <p class="mt-6">Dhaka Cantonment, Dhaka - 1206</p>
+                    <p>Phone: +880 1735746159</p>
+                    <p>Email: mdsahat6397@gmail.com</p>
+                    <p>Opening hours: 9:00 AM - 5:00 PM</p>
+                </div>
+                <div class="flex space-x-5 mt-4">
+                    <a href="#" class="text-blue-500 text-3xl"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-white text-3xl"><i class="fab fa-x"></i></a>
+                    <a href="#" class="text-red-600 text-3xl"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-pink-500 text-3xl"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <!-- Middle Section -->
+            <div>
+                <h3 class="font-bold text-lg mb-6">Useful Links</h3>
+                <ul class="text-sm space-y-3 text-gray-400">
+                    <li><a href="#" class="hover:text-teal-400">Home</a></li>
+                    <li><a href="#" class="hover:text-teal-400">About Us</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Animals</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Foundation</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Contact</a></li>
+                </ul>
+            </div>
+            <!-- Right Section -->
+            <div>
+                <h3 class="font-bold text-lg mb-6">Drop a Message</h3>
+                <form class="flex flex-col space-y-5 lg:w-10/12">
+                    <input type="email" placeholder="Enter your email"
+                        class="input input-bordered w-full rounded-lg bg-gray-900 text-white placeholder-gray-400" />
+                    <button class="bg-teal-600 text-white font-semibold py-3 px-6 rounded-md hover:bg-teal-700">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Post Details Modal -->
+    <input type="checkbox" id="post-details-modal" class="modal-toggle" />
+    <div class="modal" role="dialog">
+        <div id="post-details-modal-container" class="modal-box lg:w-full lg:max-w-2xl ">
+
+        </div>
+    </div>
+    <!-- Adoptation Process Modal -->
+    <input type="checkbox" id="adopt-pet-modal" class="modal-toggle" />
+    <div class="modal" role="dialog">
+        <div id="adopt-pet-modal-container" class="text-center modal-box space-y-4 ">
+            <img class="w-16 h-16 mx-auto" src="./images/handshake.png" alt="">
+            <h2 class="text-3xl font-extrabold">Congrates</h2>
+            <p class="font-bold text-lg">Adoptation Process is Start For your Pet</p>
+            <h1 id="countDown" class="text-6xl font-extrabold">3</h1>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
